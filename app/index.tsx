@@ -1,20 +1,38 @@
 import CalculatorButton from "@/components/CalculatorButton";
 import ThemeText from "@/components/ThemeText";
 import { Colors } from "@/constants/Colors";
+import { useCalculator } from "@/hooks/useCalculator";
 import { globalStyles } from "@/styles/global-styles";
 import React from "react";
 import { View } from "react-native";
 
 const CalculatorApp = () => {
+  const {
+    formula,
+    prevNumber,
+    buildNumber,
+    clean,
+    toggleSign,
+    deleteLast,
+    divideOperation,
+    multiplyOperation,
+    subtractOperation,
+    addOperation,
+  } = useCalculator();
+
   return (
     <View style={globalStyles.calculatorContainer}>
       {/* Result */}
       <View style={{ paddingHorizontal: 30, paddingBottom: 20 }}>
         <ThemeText numberOfLines={1} variant="h1">
-          Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          {formula}
         </ThemeText>
         <ThemeText numberOfLines={1} variant="h2">
-          SubResult
+          {formula === prevNumber ? (
+            <ThemeText>Sin numero</ThemeText>
+          ) : (
+            <ThemeText variant="h2">{prevNumber}</ThemeText>
+          )}
         </ThemeText>
 
         {/* Buttons */}
@@ -22,33 +40,25 @@ const CalculatorApp = () => {
         <View style={globalStyles.row}>
           <CalculatorButton
             label="C"
-            onPress={() => {
-              console.log("C");
-            }}
+            onPress={clean}
             blackText
             color={Colors.lightGray}
           />
           <CalculatorButton
             label="+/-"
-            onPress={() => {
-              console.log("+/-");
-            }}
+            onPress={toggleSign}
             blackText
             color={Colors.lightGray}
           />
           <CalculatorButton
             label="del"
-            onPress={() => {
-              console.log("%");
-            }}
+            onPress={deleteLast}
             blackText
             color={Colors.lightGray}
           />
           <CalculatorButton
             label="÷"
-            onPress={() => {
-              console.log("÷");
-            }}
+            onPress={divideOperation}
             color={Colors.orange}
             blackText={false}
           />
@@ -58,7 +68,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="7"
             onPress={() => {
-              console.log("7");
+              buildNumber("7");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -66,7 +76,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="8"
             onPress={() => {
-              console.log("8");
+              buildNumber("8");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -74,16 +84,14 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="9"
             onPress={() => {
-              console.log("9");
+              buildNumber("9");
             }}
             blackText={false}
             color={Colors.darkGray}
           />
           <CalculatorButton
             label="x"
-            onPress={() => {
-              console.log("x");
-            }}
+            onPress={multiplyOperation}
             color={Colors.orange}
             blackText={false}
           />
@@ -92,7 +100,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="4"
             onPress={() => {
-              console.log("4");
+              buildNumber("4");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -100,7 +108,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="5"
             onPress={() => {
-              console.log("5");
+              buildNumber("5");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -108,16 +116,14 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="6"
             onPress={() => {
-              console.log("6");
+              buildNumber("6");
             }}
             blackText={false}
             color={Colors.darkGray}
           />
           <CalculatorButton
             label="-"
-            onPress={() => {
-              console.log("-");
-            }}
+            onPress={subtractOperation}
             color={Colors.orange}
             blackText={false}
           />
@@ -126,7 +132,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="1"
             onPress={() => {
-              console.log("1");
+              buildNumber("1");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -134,7 +140,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="2"
             onPress={() => {
-              console.log("2");
+              buildNumber("2");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -142,16 +148,14 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="3"
             onPress={() => {
-              console.log("3");
+              buildNumber("3");
             }}
             blackText={false}
             color={Colors.darkGray}
           />
           <CalculatorButton
             label="+"
-            onPress={() => {
-              console.log("+");
-            }}
+            onPress={addOperation}
             color={Colors.orange}
             blackText={false}
           />
@@ -160,7 +164,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="0"
             onPress={() => {
-              console.log("0");
+              buildNumber("0");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -169,7 +173,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="."
             onPress={() => {
-              console.log(".");
+              buildNumber(".");
             }}
             blackText={false}
             color={Colors.darkGray}
@@ -177,7 +181,7 @@ const CalculatorApp = () => {
           <CalculatorButton
             label="="
             onPress={() => {
-              console.log("=");
+              console.log("Calcular resultado");
             }}
             color={Colors.orange}
             blackText={false}

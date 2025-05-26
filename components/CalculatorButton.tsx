@@ -32,7 +32,6 @@ const CalculatorButton = ({
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         onPress();
       }}
-      onPressIn={onPress}
     >
       <Text
         style={{
